@@ -19,7 +19,7 @@ class CharactersViewModel : ViewModel() {
                 val apiService = RetrofitService.createService()
                 val response = apiService.getCharacter()
                 if (response.isSuccessful) {
-                    _characters.value = response.body()?.results ?: emptyList<data.Character>()
+                    _characters.value = response.body()?.results
                 } else {
                     Log.e("CharactersViewModel", "Ошибка: ${response.errorBody()?.string()}")
                 }
