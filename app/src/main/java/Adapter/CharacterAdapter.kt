@@ -17,7 +17,7 @@ class CharacterAdapter(private val characters: List<Character>): RecyclerView.Ad
         val imageView: ImageView = itemView.findViewById(R.id.imageView)
 
 
-        fun bind(character: Character) {
+        fun bindImage(character: Character) {
             Picasso.get()
                 .load(character.image)
                 .into(imageView)
@@ -26,61 +26,38 @@ class CharacterAdapter(private val characters: List<Character>): RecyclerView.Ad
     class NameViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
         val nameTextView: TextView = itemView.findViewById(R.id.nameText)
 
-        fun bind(character: Character) {
+        fun bindName(character: Character) {
             nameTextView.text = character.name
         }
     }
     class SpeciesViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
         val speciesTextView: TextView = itemView.findViewById(R.id.speciesText)
 
-        fun bind(character: Character) {
+        fun bindSpecies(character: Character) {
             speciesTextView.text = character.species
         }
     }
 
-
-    /*override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        val inflater = LayoutInflater.from(parent.context)
-        return when (viewType) {
-            TYPE_IMAGE -> ImageViewHolder(inflater.inflate(R.layout.images, parent, false))
-            TYPE_NAME -> NameViewHolder(inflater.inflate(R.layout.names, parent, false))
-            TYPE_SPECIES -> SpeciesViewHolder(inflater.inflate(R.layout.species, parent, false))
-            else -> throw IllegalArgumentException("Invalid view type")
-        }
-    }*/
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         val inflater = LayoutInflater.from(parent.context)
         return when (viewType) {
-            Character.TYPE_IMAGE -> ImageViewHolder(inflater.inflate(R.layout.images, parent, false))
-            Character.TYPE_NAME -> NameViewHolder(inflater.inflate(R.layout.names, parent, false))
-            Character.TYPE_SPECIES -> SpeciesViewHolder(inflater.inflate(R.layout.species, parent, false))
+            Character.imageType -> ImageViewHolder(inflater.inflate(R.layout.images, parent, false))
+            Character.nameType -> NameViewHolder(inflater.inflate(R.layout.names, parent, false))
+            Character.speciesType -> SpeciesViewHolder(inflater.inflate(R.layout.species, parent, false))
             else -> throw IllegalArgumentException("Invalid view type")
         }
     }
-
-
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         val character = characters[position]
         when (holder) {
-            is ImageViewHolder -> holder.bind(character)
-            is NameViewHolder -> holder.bind(character)
-            is SpeciesViewHolder -> holder.bind(character)
+            is ImageViewHolder -> holder.bindImage(character)
+            is NameViewHolder -> holder.bindName(character)
+            is SpeciesViewHolder -> holder.bindSpecies(character)
         }
     }
 
-
-
     override fun getItemCount() = characters.size
-
-    /*override fun getItemViewType(position: Int): Int {
-        return when (characters[position].getType()) {
-            "image" -> TYPE_IMAGE
-            "name" -> TYPE_NAME
-            "species" -> TYPE_SPECIES
-            else -> throw IllegalArgumentException("Unknown type")
-        }
-    }*/
     override fun getItemViewType(position: Int): Int {
         return characters[position].getType()
     }

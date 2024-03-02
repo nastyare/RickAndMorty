@@ -12,16 +12,16 @@ data class Character(
 ) {
     fun getType(): Int {
         return when (species.toLowerCase()) {
-            "human" -> TYPE_IMAGE // Возвращаем URL изображения для человека
-            "alien" -> TYPE_NAME  // Возвращаем имя для инопланетянина
-            else -> TYPE_SPECIES  // В противном случае возвращаем вид персонажа
+            "human" -> imageType
+            "alien" -> nameType
+            else -> speciesType
         }
     }
 
     companion object {
-        const val TYPE_IMAGE = 2
-        const val TYPE_NAME = 0
-        const val TYPE_SPECIES = 1
+        const val nameType = 0
+        const val speciesType = 1
+        const val imageType = 2
     }
 }
 
