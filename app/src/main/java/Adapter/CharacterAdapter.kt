@@ -10,8 +10,9 @@ import com.example.rickandmorty.R
 import com.squareup.picasso.Picasso
 import data.Character
 
-class CharacterAdapter(private val characters: List<Character>): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class CharacterAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
+    private var characters = listOf<Character>()
 
     class ImageViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
         val imageView: ImageView = itemView.findViewById(R.id.imageView)
@@ -37,6 +38,12 @@ class CharacterAdapter(private val characters: List<Character>): RecyclerView.Ad
             speciesTextView.text = character.species
         }
     }
+
+    fun submitList(newCharacters: List<Character>) {
+        characters = newCharacters
+        notifyDataSetChanged()
+    }
+
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         val inflater = LayoutInflater.from(parent.context)

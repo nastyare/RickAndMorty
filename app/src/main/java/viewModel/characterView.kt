@@ -1,23 +1,27 @@
 package viewModel
 
 import API.RetrofitService
+import android.app.Application
 import android.util.Log
+import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.rickandmorty.RickAndMortyApiClient
 import kotlinx.coroutines.launch
 
-class CharactersViewModel : ViewModel() {
 
+class CharactersViewModel(application: Application) : AndroidViewModel(application) {
+
+    private val apiClient = RickAndMortyApiClient()
     private val _characters = MutableLiveData<List<data.Character>>()
     val characters: LiveData<List<data.Character>> = _characters
 
     fun getCharacters() {
         viewModelScope.launch {
             try {
-                val apiService = RetrofitService.createService()
-                val response = apiService.getCharacter()
+                val response = apiClient.fetchCharacters()
                 if (response.isSuccessful) {
                     _characters.value = response.body()?.results
                 } else {
