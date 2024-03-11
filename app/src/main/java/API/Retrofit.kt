@@ -13,15 +13,3 @@ interface APIService {
     @GET(RickAndMortyApp.end_point)
     suspend fun getCharacter(): Response<InfoClass>
 }
-
-object RetrofitService {
-    private val baseURL = "https://rickandmortyapi.com/api/"
-
-    fun createService(): APIService {
-        return Retrofit.Builder()
-            .baseUrl(baseURL)
-            .addConverterFactory(GsonConverterFactory.create())
-            .build()
-            .create(APIService::class.java)
-    }
-}

@@ -1,6 +1,5 @@
 package viewModel
 
-import API.RetrofitService
 import android.app.Application
 import android.util.Log
 import androidx.lifecycle.AndroidViewModel
