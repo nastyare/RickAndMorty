@@ -4,7 +4,6 @@ import Adapter.CharacterAdapter
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.example.rickandmorty.databinding.ActivityMainBinding
 import viewModel.CharactersViewModel
 import androidx.activity.viewModels
